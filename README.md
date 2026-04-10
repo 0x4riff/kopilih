@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kopilih Enhanced
 
-## Getting Started
+Versi enhanced dari konsep `kopilih.vercel.app`, dibangun dengan Next.js App Router, TypeScript, dan Tailwind CSS.
 
-First, run the development server:
+## Fitur utama
+
+- Homepage discovery yang lebih kaya: hero, search, filter, sorting, stats, featured picks
+- Detail page per cafe
+- Favorites di browser via localStorage
+- Form submit cafe oleh user
+- Admin submissions page untuk approve/reject
+- Hanya cafe approved yang tampil di listing publik
+- Route API demo untuk submission dan admin review
+- Siap deploy ke Vercel
+
+## Demo flow approval
+
+### Public
+- `/` menampilkan daftar cafe approved
+- `/cafes/[slug]` menampilkan detail cafe
+- `/submit` untuk mengirim cafe baru
+
+### Admin
+- `/admin/submissions` untuk review submission
+- `pending` bisa di-approve atau di-reject
+
+## Cara jalan lokal
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lalu buka `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Catatan penting
 
-To learn more about Next.js, take a look at the following resources:
+Project ini sengaja dibuat **demo/local-first**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Favorites disimpan di browser user
+- Listing detail client juga membaca approved submissions dari localStorage browser
+- API route admin/submission memakai in-memory server store untuk demo runtime lokal / preview
+- Di Vercel, state API route **tidak persisten** antar invocation atau redeploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Artinya, flow submit + approve saat ini cocok untuk:
+- prototype
+- demo produk
+- validasi UX
 
-## Deploy on Vercel
+Belum cocok untuk production sungguhan.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Next step production yang direkomendasikan
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Tambah database, mis. Supabase / Neon / PostgreSQL
+2. Tambah auth admin, mis. NextAuth atau Clerk
+3. Simpan submission, review log, dan favorites secara persisten
+4. Tambah image upload asli, bukan hanya image URL
+5. Tambah moderation fields: proof links, duplicate detection, audit trail
+6. Tambah role-based access untuk admin/editor
+
+## Deploy ke Vercel
+
+```bash
+npx vercel
+```
+
+Atau connect repo GitHub ke Vercel lalu deploy otomatis.
+
+## Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
