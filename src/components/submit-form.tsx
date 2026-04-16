@@ -100,7 +100,7 @@ export function SubmitForm() {
     setSending(true);
 
     try {
-      const supabase = getSupabaseBrowserClient();
+      const supabase = getSupabaseBrowserClient() as any;
       const payload = {
         name: form.name.trim(),
         slug: `${form.name}-${form.city}`.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
@@ -182,7 +182,7 @@ export function SubmitForm() {
                       key={amenity}
                       type="button"
                       onClick={() => setForm((current) => ({ ...current, amenities: active ? current.amenities.filter((item) => item !== amenity) : [...current.amenities, amenity] }))}
-                      className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${active ? "border-amber-500 bg-amber-500 text-white" : "border-slate-200 bg-white text-slate-700 hover:border-amber-300"}`}
+                      className={`rounded-full border px-4 py-2 text-sm font-semibold shadow-sm transition ${active ? "border-amber-500 bg-amber-500 text-white" : "border-slate-300 bg-white text-slate-900 hover:border-amber-300 hover:bg-amber-50"}`}
                     >
                       {amenity}
                     </button>
@@ -200,10 +200,10 @@ export function SubmitForm() {
             {error ? <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</div> : null}
 
             <div className="flex flex-wrap items-center gap-3">
-              <button type="submit" disabled={sending} className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60">
+              <button type="submit" disabled={sending} className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300 disabled:opacity-60">
                 {sending ? "Submitting..." : "Submit to queue"}
               </button>
-              <Link href="/admin/submissions" className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+              <Link href="/admin/submissions" className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300">
                 Open admin queue
               </Link>
             </div>
@@ -220,8 +220,8 @@ export function SubmitForm() {
               <h2 className="mt-2 text-3xl font-semibold leading-none text-slate-950">{submitted.name}</h2>
               <p className="mt-4 text-sm leading-6 text-slate-600">Status: {formatStatusLabel(submitted.status)}. Use the admin page to approve or reject it.</p>
               <div className="mt-5 flex gap-3">
-                <Link href="/admin/submissions" className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">Review in admin</Link>
-                <Link href="/" className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">Back home</Link>
+                <Link href="/admin/submissions" className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm">Review in admin</Link>
+                <Link href="/" className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm">Back home</Link>
               </div>
             </section>
           ) : null}

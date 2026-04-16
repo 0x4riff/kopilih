@@ -42,7 +42,7 @@ export function ShopCard({ shop }: { shop: CoffeeShop }) {
       <div className="space-y-4 p-5">
         <div className="flex items-start justify-between gap-4">
           <p className="text-sm leading-6 text-slate-600">{shop.description}</p>
-          <div className="rounded-2xl bg-amber-50 px-3 py-2 text-right text-sm text-amber-700">
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-3 py-2 text-right text-sm text-amber-900 shadow-sm">
             <div className="font-semibold">{shop.rating.toFixed(1)}</div>
             <div>{shop.reviewCount} reviews</div>
           </div>
@@ -68,7 +68,7 @@ export function ShopCard({ shop }: { shop: CoffeeShop }) {
           </span>
           <Link
             href={`/cafes/${shop.slug}`}
-            className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300"
           >
             View detail
           </Link>

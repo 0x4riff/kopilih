@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
-import type { CoffeeSubmission, SubmissionStatus } from "@/lib/types";
+import type { CoffeeSubmission, SubmissionStatus, SupabaseSubmissionRow } from "@/lib/types";
 import { formatRelativeDate, formatStatusLabel, statusTone } from "@/lib/utils";
 
 function CountCard({ label, tone, value }: { label: string; tone: "amber" | "emerald" | "rose"; value: number }) {
@@ -45,11 +45,11 @@ export function AdminSubmissions() {
     }
 
     try {
-      const supabase = getSupabaseBrowserClient();
+      const supabase = getSupabaseBrowserClient() as any;
       const { data, error } = await supabase.from("cafe_submissions").select("*").order("created_at", { ascending: false });
       if (error) throw error;
 
-      const mapped: CoffeeSubmission[] = (data ?? []).map((row) => ({
+      const mapped: CoffeeSubmission[] = ((data ?? []) as SupabaseSubmissionRow[]).map((row) => ({
         id: row.id,
         slug: row.slug,
         name: row.name,
@@ -90,7 +90,7 @@ export function AdminSubmissions() {
     if (!hasSupabaseEnv()) return;
 
     try {
-      const supabase = getSupabaseBrowserClient();
+      const supabase = getSupabaseBrowserClient() as any;
       const { error: updateError } = await supabase
         .from("cafe_submissions")
         .update({ status, admin_note: adminNote ?? null })
@@ -143,7 +143,7 @@ export function AdminSubmissions() {
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-500">Halaman ini sekarang membaca queue dari Supabase. Approve akan ikut publish ke tabel cafes.</p>
           </div>
 
-          <Link href="/submit" className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+          <Link href="/submit" className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300">
             Open submit page
           </Link>
         </div>
@@ -174,7 +174,7 @@ export function AdminSubmissions() {
                 </div>
 
                 {submission.status === "approved" ? (
-                  <Link href={`/cafes/${submission.slug}`} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                  <Link href={`/cafes/${submission.slug}`} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300">
                     Open public page
                   </Link>
                 ) : null}
@@ -206,13 +206,13 @@ export function AdminSubmissions() {
                 <div className="rounded-[28px] bg-slate-50 p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Actions</p>
                   <div className="mt-4 grid gap-3">
-                    <button type="button" onClick={() => reviewSubmission(submission, "approved", note.trim() || undefined)} className="rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600">
+                    <button type="button" onClick={() => reviewSubmission(submission, "approved", note.trim() || undefined)} className="rounded-full bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-300">
                       Approve and publish
                     </button>
-                    <button type="button" onClick={() => reviewSubmission(submission, "rejected", note.trim() || undefined)} className="rounded-full bg-rose-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-600">
+                    <button type="button" onClick={() => reviewSubmission(submission, "rejected", note.trim() || undefined)} className="rounded-full bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-300">
                       Reject submission
                     </button>
-                    <button type="button" onClick={() => reviewSubmission(submission, "pending", note.trim() || undefined)} className="rounded-full border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white">
+                    <button type="button" onClick={() => reviewSubmission(submission, "pending", note.trim() || undefined)} className="rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300">
                       Move back to pending
                     </button>
                   </div>

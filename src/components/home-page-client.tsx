@@ -11,8 +11,8 @@ import type { CoffeeShop } from "@/lib/types";
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[28px] border border-white/10 bg-white/10 p-4 backdrop-blur">
-      <div className="text-sm text-white/75">{label}</div>
+    <div className="rounded-[28px] border border-white/20 bg-slate-950/25 p-4 backdrop-blur-sm">
+      <div className="text-sm font-medium text-white/80">{label}</div>
       <div className="mt-1 text-4xl font-semibold leading-none text-white">{value}</div>
     </div>
   );
@@ -91,9 +91,12 @@ export function HomePageClient() {
           setUsingSupabase(true);
         } else {
           setPublicShops(getFallbackCoffeeShops());
+          setUsingSupabase(false);
         }
-      } catch {
+      } catch (error) {
+        console.error("Failed to load Supabase cafes", error);
         setPublicShops(getFallbackCoffeeShops());
+        setUsingSupabase(false);
       } finally {
         setLoading(false);
       }
@@ -135,7 +138,7 @@ export function HomePageClient() {
               <a href="#discover" className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-50">
                 Explore cafes
               </a>
-              <Link href="/submit" className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              <Link href="/submit" className="rounded-full border border-white/60 bg-white/12 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/70">
                 Submit a new cafe
               </Link>
             </div>
@@ -192,8 +195,8 @@ export function HomePageClient() {
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">Approved listing</p>
               <h2 className="text-4xl font-semibold leading-none text-slate-950">{filteredShops.length} cafes ready to browse</h2>
             </div>
-            <p className="max-w-sm text-sm leading-6 text-slate-500">
-              {usingSupabase ? "Data sekarang diambil dari Supabase published cafes." : "Masih fallback ke seeded demo data lokal sampai env Supabase dipasang."}
+            <p className="max-w-sm text-sm leading-6 text-slate-600">
+              {usingSupabase ? "Data sekarang diambil langsung dari Supabase published cafes." : "Masih fallback ke seeded demo data lokal. Aku sudah tambahkan fallback Supabase key supaya mode LOCAL tidak nyangkut lagi setelah redeploy."}
             </p>
           </div>
 
@@ -248,10 +251,10 @@ export function HomePageClient() {
               Submit and admin review flow akan diarahkan ke database. Favorites tetap aman disimpan lokal di browser.
             </p>
             <div className="mt-4 flex gap-3">
-              <Link href="/submit" className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+              <Link href="/submit" className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300">
                 Submit flow
               </Link>
-              <Link href="/admin/submissions" className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+              <Link href="/admin/submissions" className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300">
                 Open admin
               </Link>
             </div>

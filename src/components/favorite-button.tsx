@@ -19,7 +19,7 @@ export function FavoriteButton({ slug }: { slug: string }) {
 
   if (!mounted) {
     return (
-      <span className="inline-flex items-center rounded-full border border-white/70 bg-white/90 px-3 py-2 text-sm font-semibold text-slate-900">
+      <span className="inline-flex items-center rounded-full border border-white/80 bg-white px-3 py-2 text-sm font-semibold text-slate-950 shadow-sm">
         Save
       </span>
     );
@@ -31,8 +31,8 @@ export function FavoriteButton({ slug }: { slug: string }) {
       onClick={handleClick}
       className={`inline-flex items-center rounded-full border px-3 py-2 text-sm font-semibold transition ${
         active
-          ? "border-amber-500 bg-amber-500 text-white"
-          : "border-white/70 bg-white/90 text-slate-900 hover:bg-white"
+          ? "border-amber-500 bg-amber-500 text-white shadow-sm"
+          : "border-white/80 bg-white text-slate-950 shadow-sm hover:bg-amber-50"
       }`}
       aria-pressed={active}
       aria-label={active ? "Remove from favorites" : "Save to favorites"}
