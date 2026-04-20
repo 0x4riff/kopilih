@@ -16,7 +16,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div>
               <Link href="/" className="inline-flex items-center gap-3">
-                <img src="/kopilih-logo.svg" alt="KOPILIH" className="h-9 w-auto" />
+                <img
+                  src="https://kopilih.vercel.app/kopilih-logo.svg"
+                  alt="KOPILIH"
+                  className="h-9 w-auto"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                    const fallback = event.currentTarget.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = "inline-block";
+                  }}
+                />
+                <span className="hidden font-display text-2xl tracking-tight text-slate-950">KOPILIH</span>
               </Link>
               <p className="mt-2 text-xs text-slate-600 sm:text-sm">
                 Panduan cafe untuk kerja fokus, rapat santai, dan singgah yang terasa tepat.
