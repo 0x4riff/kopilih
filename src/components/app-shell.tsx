@@ -25,9 +25,6 @@ Jelajahi
               <Link href="/submit" className="btn btn-secondary !min-h-0 px-4 py-2.5">
 Kirim cafe
               </Link>
-              <Link href="/admin/submissions" className="btn btn-primary !min-h-0 px-4 py-2.5">
-Review
-              </Link>
             </nav>
           </div>
         </div>
