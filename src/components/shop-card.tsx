@@ -9,25 +9,25 @@ export function ShopCard({ shop, userLocation }: { shop: CoffeeShop; userLocatio
   return (
     <article className="surface-card overflow-hidden rounded-[30px] transition hover:-translate-y-[2px]">
       <div
-        className="relative h-60 bg-slate-200 bg-cover bg-center"
+        className="image-sheen relative h-64 bg-slate-200 bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(180deg, rgba(15,23,42,0.08), rgba(15,23,42,0.56)), url(${shop.imageUrl})`,
         }}
       >
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900">
+          <span className="editorial-badge bg-white/88 text-slate-900">
             {shop.city}
           </span>
-          <span className="rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-white">
+          <span className="editorial-badge bg-slate-950/82 text-white">
             {shop.priceRange}
           </span>
           {shop.source === "community" ? (
-            <span className="rounded-full bg-teal-500/85 px-3 py-1 text-xs font-semibold text-white">
+            <span className="editorial-badge border-teal-400/20 bg-teal-500/82 text-white">
 Pilihan komunitas
             </span>
           ) : null}
           {distance !== null ? (
-            <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900">
+            <span className="editorial-badge bg-white/88 text-slate-900">
 {formatDistanceKm(distance)} dari kamu
             </span>
           ) : null}
@@ -37,15 +37,15 @@ Pilihan komunitas
           <FavoriteButton slug={shop.slug} />
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
+        <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-6">
+          <p className="editorial-kicker text-white/78">
             {shop.neighborhood}
           </p>
-          <h3 className="font-display text-3xl leading-none">{shop.name}</h3>
+          <h3 className="font-display editorial-title text-3xl">{shop.name}</h3>
         </div>
       </div>
 
-      <div className="space-y-4 p-5">
+      <div className="space-y-4 p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <p className="text-sm leading-6 text-slate-600">{shop.description}</p>
           <div className="surface-muted rounded-[22px] px-3 py-2.5 text-right text-sm text-amber-900">
