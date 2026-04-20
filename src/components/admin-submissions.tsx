@@ -15,7 +15,7 @@ function CountCard({ label, tone, value }: { label: string; tone: "amber" | "eme
   };
 
   return (
-    <div className={`rounded-[28px] p-5 ${tones[tone]}`}>
+    <div className={`surface-muted rounded-[28px] p-5 ${tones[tone]}`}>
       <div className="text-sm font-semibold">{label}</div>
       <div className="mt-2 text-5xl font-semibold leading-none">{value}</div>
     </div>
@@ -24,7 +24,7 @@ function CountCard({ label, tone, value }: { label: string; tone: "amber" | "eme
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+    <div className="surface-muted rounded-[22px] px-4 py-3">
       <div className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{label}</div>
       <div className="mt-1">{value}</div>
     </div>
@@ -135,7 +135,7 @@ export function AdminSubmissions() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-      <section className="rounded-[36px] border border-white/70 bg-white/80 p-6 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.4)] backdrop-blur sm:p-8">
+      <section className="surface-card rounded-[36px] p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">KOPILIH review desk</p>
@@ -163,7 +163,7 @@ Buka form submit
           const note = notes[submission.id] ?? submission.adminNote ?? "";
 
           return (
-            <article key={submission.id} className="rounded-[32px] border border-white/70 bg-white/80 p-5 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.4)] backdrop-blur sm:p-6">
+            <article key={submission.id} className="surface-card rounded-[32px] p-5 sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
@@ -203,7 +203,7 @@ Lihat halaman publik
                   </label>
                 </div>
 
-                <div className="rounded-[28px] bg-slate-50 p-4">
+                <div className="surface-muted rounded-[28px] p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Tindakan</p>
                   <div className="mt-4 grid gap-3">
                     <button type="button" onClick={() => reviewSubmission(submission, "approved", note.trim() || undefined)} className="btn btn-primary w-full justify-center px-4">

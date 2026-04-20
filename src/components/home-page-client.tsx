@@ -12,7 +12,7 @@ import { calculateDistanceKm, filterAndSortShops, formatDistanceKm } from "@/lib
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[28px] border border-white/10 bg-black/20 p-5 backdrop-blur-sm">
+    <div className="stat-tile rounded-[28px] p-5">
       <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/65">{label}</div>
       <div className="mt-3 text-4xl font-semibold leading-none text-white">{value}</div>
     </div>
@@ -52,7 +52,7 @@ function SelectField({ label, onChange, options, value }: { label: string; onCha
 
 function SidebarCard({ children, eyebrow, title }: { children: React.ReactNode; eyebrow: string; title: string }) {
   return (
-    <section className="rounded-[30px] border border-white/70 bg-white/85 p-6 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.35)] backdrop-blur">
+    <section className="surface-card rounded-[30px] p-6">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{eyebrow}</p>
       <h3 className="mt-2 text-3xl font-semibold leading-none text-slate-950">{title}</h3>
       <div className="mt-4">{children}</div>
@@ -196,7 +196,7 @@ Kirim rekomendasi cafe
 
       <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-6" id="discover">
-          <div className="rounded-[32px] border border-white/80 bg-white/90 p-5 shadow-[0_25px_70px_-45px_rgba(15,23,42,0.25)] backdrop-blur">
+          <div className="surface-card rounded-[32px] p-5 sm:p-6">
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
               <label className="space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Cari</span>
@@ -204,7 +204,7 @@ Kirim rekomendasi cafe
                   value={filters.query}
                   onChange={(event) => setFilters((current) => ({ ...current, query: event.target.value }))}
                   placeholder="Nama cafe, kota, atau vibe"
-                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
+                  className="w-full rounded-[22px] border border-slate-200/90 bg-white/88 px-4 py-3.5 text-sm text-slate-900 shadow-[0_12px_30px_-24px_rgba(15,23,42,0.35)] outline-none backdrop-blur transition focus:border-slate-400 focus:bg-white focus:shadow-[0_18px_38px_-28px_rgba(15,23,42,0.4)]"
                 />
               </label>
 
@@ -216,7 +216,7 @@ Kirim rekomendasi cafe
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-3">
-                <label className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-800">
+                <label className="surface-muted inline-flex items-center gap-2 rounded-full px-3.5 py-2.5 text-sm font-medium text-slate-800">
                   <input
                     type="checkbox"
                     checked={filters.wifiOnly}
@@ -273,7 +273,7 @@ Prioritaskan WiFi
               ))}
             </div>
           ) : (
-            <div className="rounded-[30px] border border-dashed border-slate-300 bg-white/70 p-8 text-center text-slate-500">
+            <div className="surface-card rounded-[30px] border-dashed border-slate-300 p-8 text-center text-slate-500">
               Belum ada cafe yang cocok dengan kombinasi filter ini. Coba longgarkan radius, vibe, atau harga.
             </div>
           )}
@@ -304,7 +304,7 @@ Prioritaskan WiFi
             {favoriteShops.length > 0 ? (
               <div className="space-y-3">
                 {favoriteShops.slice(0, 4).map((shop) => (
-                  <Link key={shop.slug} href={`/cafes/${shop.slug}`} className="block rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-sm transition hover:border-amber-300 hover:bg-amber-50">
+                  <Link key={shop.slug} href={`/cafes/${shop.slug}`} className="surface-muted block rounded-[24px] px-4 py-3.5 transition hover:border-slate-300 hover:bg-white/95">
                     <div className="text-sm font-semibold text-slate-900">{shop.name}</div>
                     <div className="text-xs text-slate-500">{shop.neighborhood}, {shop.city}</div>
                   </Link>

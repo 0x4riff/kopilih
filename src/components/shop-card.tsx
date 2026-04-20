@@ -7,7 +7,7 @@ import { calculateDistanceKm, formatDistanceKm, formatPriceLabel } from "@/lib/u
 export function ShopCard({ shop, userLocation }: { shop: CoffeeShop; userLocation?: Coordinates | null }) {
   const distance = userLocation && shop.coordinates ? calculateDistanceKm(userLocation, shop.coordinates) : null;
   return (
-    <article className="overflow-hidden rounded-[30px] border border-white/70 bg-white shadow-[0_25px_70px_-40px_rgba(15,23,42,0.45)]">
+    <article className="surface-card overflow-hidden rounded-[30px] transition hover:-translate-y-[2px]">
       <div
         className="relative h-60 bg-slate-200 bg-cover bg-center"
         style={{
@@ -48,7 +48,7 @@ Pilihan komunitas
       <div className="space-y-4 p-5">
         <div className="flex items-start justify-between gap-4">
           <p className="text-sm leading-6 text-slate-600">{shop.description}</p>
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-3 py-2 text-right text-sm text-amber-900 shadow-sm">
+          <div className="surface-muted rounded-[22px] px-3 py-2.5 text-right text-sm text-amber-900">
             <div className="font-semibold">{shop.rating.toFixed(1)}</div>
             <div>{shop.reviewCount} ulasan</div>
           </div>
@@ -73,7 +73,7 @@ Dekat darimu
           ) : null}
         </div>
 
-        <div className="flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
+        <div className="flex items-center justify-between gap-3 border-t border-slate-100/80 pt-4">
           <span className="text-xs text-slate-500">
             {shop.amenities.slice(0, 3).join(" • ")}
           </span>
