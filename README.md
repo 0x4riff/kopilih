@@ -39,8 +39,8 @@ Tim review menerbitkan listing yang lolos kurasi
 ## Menjalankan lokal
 
 ```bash
-git clone https://github.com/0x4riff/kopilih-enhanced.git
-cd kopilih-enhanced
+git clone https://github.com/0x4riff/kopilih.git
+cd kopilih
 npm install
 cp .env.example .env.local
 npm run dev
